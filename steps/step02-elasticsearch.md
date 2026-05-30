@@ -1,58 +1,42 @@
-# Step 03 — Install Elasticsearch (VM1)
+# Step 02 — Install Elasticsearch (VM1)
 
 ## Objective
-Deploy a single-node Elasticsearch 8.x instance on a Ubuntu 22.04 VirtualBox VM, tune it for a 3 GB RAM constraint, and verify it is reachable from the Windows host browser.
+Deploy a single-node Elasticsearch 8.x instance on a Ubuntu 22.04 VMware VM, tune it for a 3 GB RAM constraint, and verify it is reachable from the Windows host browser.
 
 ---
 
-## VM setup (VirtualBox)
+## VM setup (VMware)
 
 ### Specs
 | Setting | Value |
 |---|---|
-| Name | `soc-elk` |
+| Name | `ubuntuelkfleet` |
 | OS | Ubuntu 22.04 LTS Server (no GUI) |
 | RAM | 3072 MB |
 | CPU | 2 cores |
 | Disk | 50 GB (dynamically allocated) |
 | Adapter 1 | NAT (internet — for apt installs) |
-| Adapter 2 | Host-Only (`vboxnet0` — lab network) |
+| Adapter 2 | Host-Only (`VMnet2` — lab network) |
 
 ### Get the host-only IP after boot
 ```bash
 ip a
-# Look for the inet address on the host-only adapter (usually enp0s8)
+# Look for the inet address on the host-only adapter
 # Note this IP — every other component will talk to this address
-# Example: 192.168.56.10
+# Example: 172.31.0.128
 ```
 
 ---
 
 ## Installation
 
-### 1. Update the system
+### 1. Download the Elasticsearch package
 ```bash
-sudo apt update && sudo apt upgrade -y
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-9.4.2-amd64.deb
 ```
-
-### 2. Install prerequisites
+### 2. Install the package
 ```bash
-sudo apt install -y curl wget gnupg apt-transport-https
-```
-
-### 3. Add the Elastic GPG key and repository
-```bash
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch \
-  | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
-
-echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] \
-  https://artifacts.elastic.co/packages/8.x/apt stable main" \
-  | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
-```
-
-### 4. Install Elasticsearch
-```bash
-sudo apt update && sudo apt install -y elasticsearch
+dpkg -i elasticsearch-9.4.2-amd64.deb
 ```
 
 > **Important:** The installer prints a built-in `elastic` superuser password and an enrollment token during first install. **Copy both immediately** — they are not shown again. Store them somewhere safe (a local text file outside the repo).
@@ -69,24 +53,11 @@ sudo nano /etc/elasticsearch/elasticsearch.yml
 Key changes to make:
 
 ```yaml
-# ── Cluster ──────────────────────────────────────────────
-cluster.name: soc-lab
-
-# ── Node ─────────────────────────────────────────────────
-node.name: elk-node-1
-
 # ── Network ──────────────────────────────────────────────
 # Bind to the host-only adapter IP so Kibana and Fleet can reach it
 # Replace with your actual host-only IP
-network.host: 192.168.56.10
+network.host: 172.31.0.128
 http.port: 9200
-
-# ── Discovery (single-node) ──────────────────────────────
-discovery.type: single-node
-
-# ── Security (enabled by default in 8.x) ─────────────────
-xpack.security.enabled: true
-xpack.security.enrollment.enabled: true
 ```
 
 > All other settings can remain at their defaults for this lab.
@@ -147,64 +118,12 @@ sudo journalctl -u elasticsearch -f
 
 ---
 
-## Firewall rules
-
-Allow port 9200 from the host-only subnet only — never expose Elasticsearch directly to the internet:
-
-```bash
-sudo ufw allow from 192.168.56.0/24 to any port 9200
-sudo ufw allow from 192.168.56.0/24 to any port 9300
-sudo ufw allow OpenSSH
-sudo ufw enable
-sudo ufw status
-```
-
----
-
-## Verification
-
-### From inside the VM
-```bash
-curl -k -u elastic:YOUR_PASSWORD https://localhost:9200
-```
-
-Expected response:
-```json
-{
-  "name" : "elk-node-1",
-  "cluster_name" : "soc-lab",
-  "cluster_uuid" : "...",
-  "version" : {
-    "number" : "8.x.x",
-    ...
-  },
-  "tagline" : "You Know, for Search"
-}
-```
-
-### From the Windows host browser
-```
-https://192.168.56.10:9200
-```
-
-Accept the self-signed certificate warning. Enter `elastic` and your password when prompted. You should see the same JSON response.
-
----
-
 ## Configs saved to repo
 
 The following files (with sensitive values redacted) are saved under `configs/elasticsearch/`:
 
 **`configs/elasticsearch/elasticsearch.yml`**
-```yaml
-cluster.name: soc-lab
-node.name: elk-node-1
-network.host: REDACTED
-http.port: 9200
-discovery.type: single-node
-xpack.security.enabled: true
-xpack.security.enrollment.enabled: true
-```
+
 
 **`configs/elasticsearch/heap.options`**
 ```
