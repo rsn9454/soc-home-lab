@@ -24,7 +24,8 @@ Elasticsearch · Kibana · Fleet Server · Elastic Agent · Sysmon · Mythic C2 
 | 1 | Logical diagram | ✅ |
 | 2 | Install Elasticsearch (VM1) | ✅ |
 | 3 | Install Kibana (VM1) | ✅ |
-| 4 | Set up Fleet Server (VM1) | 🔄 |
+| 4 | Set up Fleet Server (VM1) | ✅ |
+| 5 | Enroll Windows Server 20222 (VM2) | 🔄 |
 
 ## Skills demonstrated
 - SIEM deployment and configuration
