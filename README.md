@@ -28,6 +28,7 @@ Elasticsearch · Kibana · Fleet Server · Elastic Agent · Sysmon · Mythic C2 
 | 5 | Install Elastic Agent on Windows Server 2022 (VM2) | ✅ |
 | 6 | Install and configure Sysmon (VM2) | ✅ |
 | 7 | Install Elastic Agent on Ubuntu Server (VM3) | ✅ |
+| 8 | Create SSH Brute Force alert rule | ✅ |
 
 ## Skills demonstrated
 - SIEM deployment and configuration

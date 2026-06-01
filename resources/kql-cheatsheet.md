@@ -45,3 +45,8 @@ event.dataset: "system.auth" AND
 system.auth.ssh.event: "Accepted"
 
 ```
+# SSH Brute Force Detection Alert
+```kql
+# Verify alert fired — check Security Alerts index
+kibana.alert.rule.name: "SSH Brute Force Activity - ubuntutarget"
+```
