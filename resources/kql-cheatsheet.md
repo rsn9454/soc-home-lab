@@ -50,3 +50,31 @@ system.auth.ssh.event: "Accepted"
 # Verify alert fired — check Security Alerts index
 kibana.alert.rule.name: "SSH Brute Force Activity - ubuntutarget"
 ```
+
+# RDP Brute Force Detection  Queries
+```kql
+# All failed logon events on Windows target
+agent.name: "WIN-KT9TVSF1T0C" AND event.code: "4625"
+
+# RDP failed logons only (LogonType 10) (if you are using local network then LogonType is 3)
+agent.name: "WIN-KT9TVSF1T0C" AND
+event.code: "4625" AND
+winlog.event_data.LogonType: "10"
+
+# RDP failed logons from a specific IP
+agent.name: "WIN-KT9TVSF1T0C" AND
+event.code: "4625" AND
+winlog.event_data.LogonType: "10" AND
+source.ip: "172.31.0.1"
+
+# RDP successful logins (for comparison / baselining)
+agent.name: "WIN-KT9TVSF1T0C" AND
+event.code: "4624" AND
+winlog.event_data.LogonType: "10"
+
+# All failed logons by username (brute force username enumeration)
+agent.name: "WIN-KT9TVSF1T0C" AND
+event.code: "4625" AND
+winlog.event_data.LogonType: "10"
+# Add winlog.event_data.TargetUserName as a column in Discover
+```

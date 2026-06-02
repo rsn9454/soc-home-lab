@@ -19,16 +19,17 @@ Hands-on SOC lab built step by step using Elasticsearch, Logstash, Kibana, Sysmo
 Elasticsearch · Kibana · Fleet Server · Elastic Agent · Sysmon · Mythic C2 · osTicket · VirtualBox
 
 ## Progress
-| Step | Topic | Status |
-|------|-------|--------|
-| 1 | Logical diagram | ✅ |
-| 2 | Install Elasticsearch (VM1) | ✅ |
-| 3 | Install Kibana (VM1) | ✅ |
-| 4 | Set up Fleet Server (VM1) | ✅ |
-| 5 | Install Elastic Agent on Windows Server 2022 (VM2) | ✅ |
-| 6 | Install and configure Sysmon (VM2) | ✅ |
-| 7 | Install Elastic Agent on Ubuntu Server (VM3) | ✅ |
-| 8 | Create SSH Brute Force alert rule | ✅ |
+| Step | Topic | Status | Report | Screenshots |
+|------|-------|--------|--------|-------------|
+| 1 | Logical diagram | ✅ | [Read](steps/step01-logical-diagram.md) | [View](diagrams/soc-lab-logical-diagram.png) |
+| 2 | Install Elasticsearch (VM1) | ✅ | [Read](steps/step02-elasticsearch.md) | - |
+| 3 | Install Kibana (VM1) | ✅ | [Read](steps/step03-kibana.md) | [View](diagrams/step03-kibana-ui.png) |
+| 4 | Set up Fleet Server (VM1) | ✅ | [Read](steps/step04-fleet-server.md) | [View](diagrams/step04-fleet-enrolled.png) |
+| 5 | Install Elastic Agent on Windows Server 2022 (VM2) | ✅ | [Read](steps/step05-windows-agent.md) | [View](diagrams/step05-windows-enrolled.png) |
+| 6 | Install and configure Sysmon (VM2) | ✅ | [Read](steps/step06-sysmon.md) | [View](diagrams/step06-sysmon-logs.png) |
+| 7 | Install Elastic Agent on Ubuntu Server (VM3) | ✅ | [Read](steps/step07-ubuntu-agent.md) | [View](diagrams/step07-ubuntu-enrolled.png) |
+| 8 | Create SSH brute force alert rule | ✅ | [Read](steps/step08-ssh-alert-rule.md) | [View](diagrams/step08-ssh-alert-triggered.png) |
+| 9 | Create RDP brute force alert rule | ✅ | [Read](steps/step09-rdp-alert-rule.md) | [View](diagrams/step09-rdp-alert-triggered.png) |
 
 ## Skills demonstrated
 - SIEM deployment and configuration
