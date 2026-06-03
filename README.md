@@ -30,6 +30,7 @@ Elasticsearch · Kibana · Fleet Server · Elastic Agent · Sysmon · Mythic C2 
 | 7 | Install Elastic Agent on Ubuntu Server (VM3) | ✅ | [Read](steps/step07-ubuntu-agent.md) | [View](diagrams/step07-ubuntu-enrolled.png) |
 | 8 | Create SSH brute force alert rule | ✅ | [Read](steps/step08-ssh-alert-rule.md) | [View](diagrams/step08-ssh-alert-triggered.png) |
 | 9 | Create RDP brute force alert rule | ✅ | [Read](steps/step09-rdp-alert-rule.md) | [View](diagrams/step09-rdp-alert-triggered.png) |
+| 10 | Create C2 Attack chain diagram | ✅ | [Read](steps/step10-attack-diagram.md) | [View](diagrams/attack-diagram.png) |
 
 ## Skills demonstrated
 - SIEM deployment and configuration
