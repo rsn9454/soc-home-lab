@@ -78,3 +78,26 @@ event.code: "4625" AND
 winlog.event_data.LogonType: "10"
 # Add winlog.event_data.TargetUserName as a column in Discover
 ```
+
+# Key Log Queries (C2 Attack Chain)
+
+```kql
+# Apollo agent process creation (Sysmon Event ID 1)
+event.code: "1" AND
+winlog.channel: "Microsoft-Windows-Sysmon/Operational" AND
+winlog.event_data.Image: "*svchost*"
+
+# C2 network beacon (Sysmon Event ID 3)
+event.code: "3" AND
+winlog.channel: "Microsoft-Windows-Sysmon/Operational" AND
+winlog.event_data.DestinationPort: "80" AND
+winlog.event_data.Image: "*svchost*"
+
+# Windows Defender disabled (Event ID 1116 / PowerShell)
+event.code: "1" AND
+winlog.event_data.CommandLine: "*DisableRealtimeMonitoring*"
+
+# Discovery commands run via C2 session
+event.code: "1" AND
+winlog.event_data.CommandLine: ("*whoami*" OR "*ipconfig*" OR "*net user*" OR "*net group*")
+```
