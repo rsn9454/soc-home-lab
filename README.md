@@ -33,6 +33,7 @@ Elasticsearch · Kibana · Fleet Server · Elastic Agent · Sysmon · Mythic C2 
 | 10 | Create C2 attack chain diagram | ✅ | [Read](steps/step10-attack-diagram.md) | [View](diagrams/attack-diagram.png) |
 | 11 | Install Mythic C2 server (VM4) | ✅ | [Read](steps/step11-mythic-server-install.md) | [View](diagrams/step11-mythic-ui.png) |
 | 12 |  Apollo agent + HTTP C2 profile installed, payload executed, callback confirmed (C2 attack chain is completed) | ✅ | [Read](steps/step12-apollo-payload-and-c2-callback.md) | [View](diagrams/) |
+| 13 | Apollo C2 detection rule + 3-panel activity dashboard built in Kibana | ✅ | [Read](steps/step13-c2-detection-and-dashboard.md) | [View](diagrams/) |
 
 
 ## Skills demonstrated
