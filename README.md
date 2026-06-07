@@ -35,7 +35,8 @@ Elasticsearch · Kibana · Fleet Server · Elastic Agent · Sysmon · Mythic C2 
 | 12 |  Apollo agent + HTTP C2 profile installed, payload executed, callback confirmed (C2 attack chain is completed) | ✅ | [Read](steps/step12-apollo-payload-and-c2-callback.md) | [View](diagrams/) |
 | 13 | Apollo C2 detection rule + 3-panel activity dashboard built in Kibana | ✅ | [Read](steps/step13-c2-detection-and-dashboard.md) | [View](diagrams/) |
 | 14 | Installed osTicket + Kibana webhook integration | ✅ | [Read](steps/step14-osticket-install.md) | [View](diagrams/step14-test-ticket-created.png) |
-| 15 | Investigate Mythic C2 Apollo agent end-to-ebd | ✅ | [Read](steps/step15-mythic-agent-investigation.md) | [View](diagrams/) |
+| 15 | Investigate Mythic C2 Apollo agent end-to-end | ✅ | [Read](steps/step15-mythic-agent-investigation.md) | [View](diagrams/) |
+| 16 | Install Elastic Defend (EDR) and test on Windows target | ✅ | [Read](steps/step16-elastic-defend.md) | [View](diagrams/) |
 
 ## Skills demonstrated
 - SIEM deployment and configuration
