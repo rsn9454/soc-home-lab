@@ -8,11 +8,11 @@ Each scenario includes the attack description, the tools used, the detection met
 
 ## Overview
 
-| # | Scenario | Target | Steps | Status |
-|---|---|---|---|---|
-| 1 | SSH Brute Force | Ubuntu Server VM3 (`ubuntutarget`) | 10, 14 | ✅ Detected |
-| 2 | RDP Brute Force | Windows Server VM2 (`WIN-KT9TVSF1T0C`) | 11, 15 | ✅ Detected |
-| 3 | Mythic C2 Full Attack Chain | Windows Server VM2 (`WIN-KT9TVSF1T0C`) | 20–23 | ✅ Detected |
+| # | Scenario | Target | Status |
+|---|---|---|---|
+| 1 | SSH Brute Force | Ubuntu Server VM3 (`ubuntutarget`) | ✅ Detected |
+| 2 | RDP Brute Force | Windows Server VM2 (`WIN-KT9TVSF1T0C`) | ✅ Detected |
+| 3 | Mythic C2 Full Attack Chain | Windows Server VM2 (`WIN-KT9TVSF1T0C`) | ✅ Detected + Investigated |
 
 ---
 
@@ -62,9 +62,6 @@ source.geo.country_name → origin country (external IPs only)
 # Successful SSH login (post-brute force)
 agent.name: "ubuntutarget" AND system.auth.ssh.event: "Accepted"
 ```
-
-### Investigation write-up
-`investigations/ssh-brute-force-investigation.md` *(to be completed)*
 
 ---
 
@@ -120,9 +117,6 @@ event.code: "4624" AND
 (winlog.event_data.LogonType: "10" OR winlog.event_data.LogonType: "3")
 ```
 
-### Investigation write-up
-`investigations/rdp-brute-force-investigation.md` *(to be completed)*
-
 ---
 
 ## Scenario 3 — Mythic C2 Full Attack Chain
@@ -161,7 +155,7 @@ This is the most complex scenario in the lab and maps to multiple MITRE ATT&CK t
 | 6 | Discovery | `whoami` — identify current user context | Discovery | System Owner/User Discovery | T1033 |
 | 7 | Discovery | `ipconfig` — enumerate network configuration | Discovery | System Network Configuration Discovery | T1016 |
 | 8 | Discovery | `net user` — enumerate local accounts | Discovery | Account Discovery: Local Account | T1087.001 |
-| 9 | Discovery | `net group` — enumerate domain groups | Discovery | Account Discovery: Domain Account | T1087.002 |
+
 
 ### Detection rules
 
@@ -196,7 +190,7 @@ Added to `resources/kql-cheatsheet.md`
 | Mythic C2 Activity Dashboard | `dashboards/mythic-c2-activity-dashboard.ndjson` | Process creation (ID 1), Outbound connections (ID 3), Defender disabled (ID 5001) |
 
 ### Investigation write-up
-`investigations/mythic-c2-investigation.md` *(to be completed)*
+`investigations/mythic-c2-investigation.md`
 
 ---
 
